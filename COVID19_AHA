@@ -1,0 +1,59 @@
+/* 
+COVID 19 American Heart Associaton Data Exploration
+
+Skills Used: Comparison + Logical Operators, Aggregate Functions, Group By, 
+
+*/
+
+--Viewing the data
+SELECT *
+ FROM `bigquery-public-data.covid19_aha.staffing` 
+ ORDER BY state_name, county_name
+ 
+ 
+ --Viewing staffing Data for California 
+ 
+ SELECT *
+ FROM `bigquery-public-data.covid19_aha.staffing` 
+ WHERE state_name = 'California'
+ ORDER BY state_name, county_name
+
+ --Viewing staffing Data for California 
+ --Orders results by counties with highest FT personnel 
+ 
+ SELECT *
+ FROM `bigquery-public-data.covid19_aha.staffing` 
+ WHERE state_name = 'California'
+ ORDER BY total_personnel_ft desc
+ 
+ --Viewing top 10 coutines with highest Nursing Staff Percentage
+ 
+ SELECT *,
+(registered_nurses_ft/total_hospital_unit_personnel_ft)*100 AS Percentage_of_Nurse_Staff
+ FROM `bigquery-public-data.covid19_aha.staffing` 
+ WHERE state_name = 'California'
+ORDER BY Percentage_of_Nurse_Staff DESC
+LIMIT 10
+
+--Viewing top 20 states with higest total Full time Nurses
+SELECT
+SUM(registered_nurses_ft) AS Total_FT_Nurses,
+SUM(registered_nurses_pt) AS Total_PT_Nurses,
+state_name
+ FROM `bigquery-public-data.covid19_aha.staffing` 
+GROUP BY state_name
+ORDER BY Total_FT_Nurses DESC
+LIMIT 20
+
+--Viewing top 20 states with higest total Part time Nurses
+SELECT
+SUM(registered_nurses_ft) AS Total_FT_Nurses,
+SUM(registered_nurses_pt) AS Total_PT_Nurses,
+state_name
+ FROM `bigquery-public-data.covid19_aha.staffing` 
+GROUP BY state_name
+ORDER BY Total_PT_Nurses DESC
+LIMIT 20
+
+
+ 
