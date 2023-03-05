@@ -1,0 +1,58 @@
+/*
+
+College Football Data exploration
+
+Skills used: Case, Aggregate Functions, Operators, Inner Join
+
+*/
+
+--Startin Data 
+SELECT *
+FROM benn.college_football_players
+
+--Viewing which players are Seniors 
+
+SELECT player_name,
+year,
+CASE WHEN year = 'SR' THEN 'yes'
+ELSE 'no' END AS is_a_senior
+FROM
+benn.college_football_players;
+
+--Viewing players from California
+
+SELECT player_name,
+State,
+CASE WHEN state = 'CA' THEN 'yes'
+ELSE NULL END AS Cali_Players
+FROM benn.college_football_players
+ORDER BY player_name
+
+--Viewing Average height by College
+
+SELECT 
+AVG (height) AS Avg_height,
+school_name
+FROM benn.college_football_players
+GROUP BY school_name
+
+--Viewing Average height of all players, tallest player, and shortest player
+
+SELECT 
+AVG (height) AS Avg_height,
+MAX(height) AS Tallest,
+MIN(height) AS Shortest
+FROM benn.college_football_players
+LIMIT 100
+
+--Categorizing players by height as either Above Average, Average, or Below Average
+
+SELECT 
+player_name,
+height,
+CASE WHEN height > 75 THEN 'Tall'
+WHEN height <=75 AND height>= 73 THEN 'Above Average'
+WHEN height <73 AND height >=71 THEN 'Average'
+WHEN height <71 THEN 'Below Average' END AS Height_class
+FROM benn.college_football_players
+LIMIT 100
