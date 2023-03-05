@@ -1,3 +1,3 @@
 # Data Analyst PortfolioProjects
 
-This Repository will hold the queries from my portfolio projects
+This Repository will hold the the sql queries for some of my Analysis projects
