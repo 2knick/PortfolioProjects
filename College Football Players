@@ -6,7 +6,7 @@ Skills used: Case, Aggregate Functions, Operators, Inner Join
 
 */
 
---Startin Data 
+--Starting Data 
 SELECT *
 FROM benn.college_football_players
 
